@@ -38,7 +38,7 @@ const Register  = () => {
             .then( res =>
             {
                 alert(res.data.message)
-                navigate("/login")
+                navigate("/login");
             }
             )
         } else {
