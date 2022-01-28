@@ -3,7 +3,7 @@ import './App.css';
 import Homepage from './components/homepage/homepage';
 import Login from './components/login/login';
 import Register from './components/register/register';
-import { render } from "react-dom";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -24,9 +24,6 @@ const [user, setLoginUser] = useState({})
           <Route path='/register' element={<Register/>}/> 
         </Routes>
       </Router>
-      {/* <Homepage/> */}
-      {/* <Login/> */}
-      {/* <Register/> */}
     </div>
   );
 }
