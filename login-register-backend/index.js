@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
+import bcrypt from "bcryptjs"
 
 const app = express()
 app.use(express.json())
@@ -24,6 +25,16 @@ const userSchema = new mongoose.Schema({
     gender:String
 })
 
+//Encrypting the password with hash function
+
+userSchema.pre('save', async function(next){
+    console.log("hiiii")
+    if(this.isModified('password')){
+        this.password = await bcrypt.hash(this.password,12);
+    }
+    next();
+})
+
 // Model of Schema
 
 const User = new mongoose.model("User", userSchema)
@@ -35,7 +46,8 @@ app.post("/login", (req, res)=> {
     const { email, password} = req.body
     User.findOne({ email: email}, (err, user) => {
         if(user){
-            if(password === user.password ) {
+            const isMatch =  bcrypt.compare(password, user.password);
+            if(isMatch ) {
                 res.send({message: "Login Successfull", user: user})
                 
             } else {
@@ -48,8 +60,6 @@ app.post("/login", (req, res)=> {
 }) 
 
 app.post("/register", (req, res)=> {
-    // res.send("My API Register")
-    // console.log(req.body)
     const { name, email, password,dob,gender} = req.body
     User.findOne({email: email}, (err, user) => {
         if(user){

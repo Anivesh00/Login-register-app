@@ -13,7 +13,7 @@ const Register  = () => {
         password:"",
         reEnterPassword: "",
         dob: "",
-        gender: "",
+        gender: ""
     })
 
     const handleChange = e => {

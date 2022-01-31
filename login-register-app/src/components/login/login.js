@@ -3,7 +3,7 @@ import "./login.css"
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 
-const Login  = ({updateUser}) => {
+const Login  = ({setLoginUser}) => {
 
     let navigate = useNavigate()
 
@@ -26,7 +26,7 @@ const Login  = ({updateUser}) => {
             // alert(res.data.message)
             {
             alert(res.data.message)
-            updateUser(res.data.user)
+            setLoginUser(res.data.user)
             navigate("/")
         }
         )
